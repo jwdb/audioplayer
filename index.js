@@ -1,5 +1,7 @@
 const express = require('express');
 const npo = require('./news/npo');
+const { v4: uuidv4 } = require('uuid');
+const { playAudioUrl } = require('./core');
 
 const app = express()
 const port = 3000
@@ -10,6 +12,13 @@ app.get('/news', (req, res) => {
 
   res.send(uuid);
 })
+
+app.get('/play', (req, res) => {
+  const url = req.query.url;
+  const uuid = uuidv4();
+  playAudioUrl(uuid, url, playLocks);
+  res.send(uuid);
+});
 
 app.get('/cancel', (req, res) => {
   const uuid = req.query.id;
