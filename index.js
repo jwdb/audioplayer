@@ -21,6 +21,13 @@ app.get('/cancel', (req, res) => {
   res.send('Ok!');
 });
 
+app.get('/cancelall', (req, res) => {
+  for (const request in playLocks) {
+    playLocks[request].close();
+  }
+  res.send('Ok!');
+});
+
 app.listen(port, () => {
   console.log(`audioplayer-news app listening on port ${port}`)
 })
