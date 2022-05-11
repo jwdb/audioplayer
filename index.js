@@ -15,8 +15,9 @@ app.get('/news', (req, res) => {
 
 app.get('/play', (req, res) => {
   const url = req.query.url;
+  let bitrate = req.query.bitrate !== undefined ? req.query.bitrate : 44100;
   const uuid = uuidv4();
-  playAudioUrl(uuid, url, playLocks);
+  playAudioUrl(uuid, url, playLocks, bitrate);
   res.send(uuid);
 });
 
